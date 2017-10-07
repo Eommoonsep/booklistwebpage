@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+	xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
+	id="WebApp_ID" version="3.1">
+	<display-name>sist</display-name>
+	<welcome-file-list>
+		<welcome-file>index.html</welcome-file>
+		<welcome-file>index.htm</welcome-file>
+		<welcome-file>index.jsp</welcome-file>
+		<welcome-file>default.html</welcome-file>
+		<welcome-file>default.htm</welcome-file>
+		<welcome-file>default.jsp</welcome-file>
+	</welcome-file-list>
+
+	<servlet>
+		<servlet-name>controller</servlet-name>
+		<servlet-class>com.test.ControllerServlet</servlet-class>
+		<init-param>
+			<param-name>ext</param-name>
+			<param-value>.it</param-value>
+		</init-param>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>controller</servlet-name>
+		<url-pattern>*.it</url-pattern>
+	</servlet-mapping>
+
+	<!-- 필터 클래스 등록을 위한 설정 -->
+	<filter>
+		<filter-name>characterEncodingFilter</filter-name>
+		<filter-class>com.filter.CharacterEncodingFilter</filter-class>
+		
+		<!-- 인코딩 설정 기본값 -->
+		<init-param>
+			<param-name>encoding</param-name>
+			<param-value>UTF-8</param-value>
+		</init-param>
+		
+	</filter>
+
+	<filter-mapping>
+		<filter-name>characterEncodingFilter</filter-name>
+		<!-- 사용자 요청 주소에 따른 필터 실행 조건 지정 -->
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+	
+	
+	<!-- 필터 클래스 등록을 위한 설정 -->
+	<filter>
+		<filter-name>loginCheckFilter</filter-name>
+		<filter-class>com.filter.LoginCheckFilter</filter-class>
+	</filter>
+
+	<filter-mapping>
+		<filter-name>loginCheckFilter</filter-name>
+		<!-- 사용자 요청 주소에 따른 필터 실행 조건 지정 -->
+		<!-- 주의) 로그인 필터 지정시 특정 요청 주소에만 적용할 것 -->
+		<!-- 주소 등록을 여러개 같이 등록할 수 있다. -->
+		<url-pattern>/adminmain.it</url-pattern>
+		<url-pattern>/adminqaboardlist.it</url-pattern>
+		<url-pattern>/adminmenu.it</url-pattern>
+	</filter-mapping>
+
+</web-app>
